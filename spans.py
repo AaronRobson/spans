@@ -70,60 +70,8 @@ def NumbersToSpans(numbers):
 def NumbersToRangeText(numbers):
     return JoinSpans(NumbersToSpans(numbers))
 
-def Test():
-    _givenNumbers1 = (1,)
-    _givenNumbers3_4 = (3,4,)
-    _givenNumbers = _givenNumbers1 + _givenNumbers3_4
-
-    _s1 = Span(*_givenNumbers1)
-    _s3_4 = Span(*_givenNumbers3_4)
-
-    def TestSpanObject():
-        assert _s1.start == _givenNumbers1[0]
-        assert _s3_4.start == _givenNumbers3_4[0]
-
-        assert _s1.finish == _givenNumbers1[0]
-        assert _s3_4.finish == _givenNumbers3_4[1]
-
-        assert _s1.single
-        assert not _s3_4.single
-
-        assert _s1.arguments == _givenNumbers1
-        assert _s3_4.arguments == _givenNumbers3_4
-
-        assert _s1 == _s1
-        assert _s1 != _s3_4
-        assert _s3_4 == _s3_4
-
-        assert repr(_s1) == 'Span(%s)' % (str(_givenNumbers1[0]))
-        assert repr(_s3_4) == 'Span(%s)' % (str(_givenNumbers3_4[0]) + ', ' + str(_givenNumbers3_4[1]))
-
-        assert str(_s1) == str(_givenNumbers1[0])
-        assert str(_s3_4) == str(_givenNumbers3_4[0]) + '-' + str(_givenNumbers3_4[1])
-
-        assert tuple(iter(Span(5,7))) == (5,6,7,)
-
-    def TestJoinSpans():
-        assert JoinSpans([_s1]) == str(_givenNumbers1[0])
-        assert JoinSpans([_s1, _s3_4]) == str(_givenNumbers1[0]) + ', ' + str(_givenNumbers3_4[0]) + '-' + str(_givenNumbers3_4[1])
-
-    def TestNumbersToSpans():
-        assert tuple(NumbersToSpans(_givenNumbers1)) == (_s1,)
-        assert tuple(NumbersToSpans(_givenNumbers3_4)) == (_s3_4,)
-        assert tuple(NumbersToSpans(_givenNumbers)) == (_s1,_s3_4,)
-
-    def TestNumbersToRangeText():
-        assert NumbersToRangeText(_givenNumbers1) == '1'
-        assert NumbersToRangeText(_givenNumbers3_4) == '3-4'
-        assert NumbersToRangeText(_givenNumbers) == '1, 3-4'
-
-    TestSpanObject()
-    TestJoinSpans()
-    TestNumbersToSpans()
-    TestNumbersToRangeText()
-
-Test()
-
 if __name__ == '__main__':
     EXAMPLE_NUMBERS = tuple(sorted([1,2,4,5,6,10]))
-    print('The following numbers:\n%r\nMay be represented as:\n%r\n' % (EXAMPLE_NUMBERS, NumbersToRangeText(EXAMPLE_NUMBERS)))
+    print('Number span compression for example the following numbers:\n%r\nMay be represented as:\n%r\n' % (', '.join(map(str, EXAMPLE_NUMBERS)), NumbersToRangeText(EXAMPLE_NUMBERS)))
+    values = list(map(int, input('Enter numbers to compress span: ').replace(' ', '').split(',')))
+    print(NumbersToRangeText(values))
