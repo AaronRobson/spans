@@ -1,10 +1,11 @@
-'''It is how Printing of ranges and individual pages of a document can be specified in applications.
-For instance:
-"1-3,5" would print pages (1,2,3,5,).
+'''Document programs tend to specify printing ranges like this:
+"1-3,5" prints pages 1, 2, 3 and 5.
+This program is designed to do the same.
 
-Similar to this
+Similar to this:
 http://texblog.org/2007/05/28/mulitple-reference-citation/
 '''
+
 
 class Span:
     def __init__(self, start, finish=None):
@@ -34,11 +35,13 @@ class Span:
         try:
             return self.arguments == other.arguments
         except AttributeError:
-            #Must therefore be a different type of object.
+            # Must therefore be a different type of object.
             return False
 
     def __repr__(self):
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(self.argumentsAsStrings))
+        return '%s(%s)' % (
+            self.__class__.__name__,
+            ', '.join(self.argumentsAsStrings))
 
     def __str__(self):
         return '-'.join(self.argumentsAsStrings)
@@ -46,8 +49,10 @@ class Span:
     def __iter__(self):
         return iter(range(self.start, self.finish+1))
 
+
 def JoinSpans(spans):
     return ', '.join(map(str, spans))
+
 
 def NumbersToSpans(numbers):
     sequence = sorted(set(numbers))
@@ -67,11 +72,18 @@ def NumbersToSpans(numbers):
     if (currentSpan is not None) and (currentSpan != lastSent):
         yield currentSpan
 
+
 def NumbersToRangeText(numbers):
     return JoinSpans(NumbersToSpans(numbers))
 
+
 if __name__ == '__main__':
-    EXAMPLE_NUMBERS = tuple(sorted([1,2,4,5,6,10]))
-    print('Number span compression for example the following numbers:\n%r\nMay be represented as:\n%r\n' % (', '.join(map(str, EXAMPLE_NUMBERS)), NumbersToRangeText(EXAMPLE_NUMBERS)))
-    values = list(map(int, input('Enter numbers to compress span: ').replace(' ', '').split(',')))
+    EXAMPLE_NUMBERS = tuple(sorted([1, 2, 4, 5, 6, 10]))
+    print(
+        'Number span compression, for example the following numbers:' +
+        '\n%r\nMay be represented as:\n%r\n' %
+        (', '.join(
+            map(str, EXAMPLE_NUMBERS)), NumbersToRangeText(EXAMPLE_NUMBERS)))
+    numberText = input('Enter numbers to compress span: ')
+    values = list(map(int, numberText.replace(' ', '').split(',')))
     print(NumbersToRangeText(values))
