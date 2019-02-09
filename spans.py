@@ -6,6 +6,8 @@ Similar to this:
 http://texblog.org/2007/05/28/mulitple-reference-citation/
 '''
 
+import argparse
+
 
 class Span:
     def __init__(self, start, finish=None):
@@ -81,14 +83,23 @@ def parse_numbers(numbersText):
     return set(map(int, numbersText.replace(',', ' ').split()))
 
 
+def produce_parser():
+    example_input = '1 2 4 5 6 10'
+    example_output = numbers_to_range_text(parse_numbers(example_input))
+    example_text = ('example:\n\n$ python spans.py ' +
+                    example_input + '\n' + example_output)
+
+    parser = argparse.ArgumentParser(
+        description='pass numbers to convert into spans.',
+        epilog=example_text,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument(
+        'numbers', type=int, nargs='*',
+        help='a list of numbers')
+    return parser
+
+
 if __name__ == '__main__':
-    EXAMPLE_NUMBERS = tuple(sorted([1, 2, 4, 5, 6, 10]))
-    print(
-        'Number span compression, for example the following numbers:' +
-        '\n%r\nMay be represented as:\n%r\n' %
-        (', '.join(
-            map(str, EXAMPLE_NUMBERS)),
-            numbers_to_range_text(EXAMPLE_NUMBERS)))
-    numberText = input('Enter numbers to compress span: ')
-    values = parse_numbers(numberText)
-    print(numbers_to_range_text(values))
+    parser = produce_parser()
+    args = parser.parse_args()
+    print(numbers_to_range_text(args.numbers))
