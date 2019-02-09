@@ -77,6 +77,10 @@ def NumbersToRangeText(numbers):
     return JoinSpans(NumbersToSpans(numbers))
 
 
+def parse_numbers(numbersText):
+    return list(map(int, numbersText.replace(' ', '').split(',')))
+
+
 if __name__ == '__main__':
     EXAMPLE_NUMBERS = tuple(sorted([1, 2, 4, 5, 6, 10]))
     print(
@@ -85,5 +89,5 @@ if __name__ == '__main__':
         (', '.join(
             map(str, EXAMPLE_NUMBERS)), NumbersToRangeText(EXAMPLE_NUMBERS)))
     numberText = input('Enter numbers to compress span: ')
-    values = list(map(int, numberText.replace(' ', '').split(',')))
+    values = parse_numbers(numberText)
     print(NumbersToRangeText(values))
