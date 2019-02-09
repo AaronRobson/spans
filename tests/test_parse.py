@@ -7,6 +7,9 @@ from spans import parse_numbers
 
 class TestParseNumbers(unittest.TestCase):
 
+    def test_empty(self):
+        self.assertEqual(parse_numbers(''), [])
+
     def test_comma_separated(self):
         self.assertEqual(parse_numbers('1,2'), [1, 2])
 
