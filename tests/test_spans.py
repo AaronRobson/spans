@@ -80,7 +80,3 @@ class TestSpans(unittest.TestCase):
         self.assertEqual(
             spans.NumbersToRangeText([1, 2, 4, 5, 6, 10]),
             '1-2, 4-6, 10')
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -12,7 +12,3 @@ class TestParseNumbers(unittest.TestCase):
 
     def test_comma_space_separated(self):
         self.assertEqual(parse_numbers('3, 4'), [3, 4])
-
-
-if __name__ == "__main__":
-    unittest.main()
