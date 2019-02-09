@@ -2,7 +2,7 @@
 
 import unittest
 
-import spans
+from spans import Span, join_spans, numbers_to_spans, numbers_to_range_text
 
 
 class TestSpans(unittest.TestCase):
@@ -12,8 +12,8 @@ class TestSpans(unittest.TestCase):
         self._givenNumbers3_4 = (3, 4)
         self._givenNumbers = self._givenNumbers1 + self._givenNumbers3_4
 
-        self._s1 = spans.Span(*self._givenNumbers1)
-        self._s3_4 = spans.Span(*self._givenNumbers3_4)
+        self._s1 = Span(*self._givenNumbers1)
+        self._s3_4 = Span(*self._givenNumbers3_4)
 
     def testSpanObject(self):
         self.assertEqual(self._s1.start, self._givenNumbers1[0])
@@ -48,35 +48,35 @@ class TestSpans(unittest.TestCase):
             str(self._givenNumbers3_4[0]) + '-' +
             str(self._givenNumbers3_4[1]))
 
-        self.assertEqual(tuple(iter(spans.Span(5, 7))), (5, 6, 7))
+        self.assertEqual(tuple(iter(Span(5, 7))), (5, 6, 7))
 
     def testJoinSpans(self):
         self.assertEqual(
-            spans.join_spans([self._s1]), str(self._givenNumbers1[0]))
+            join_spans([self._s1]), str(self._givenNumbers1[0]))
         self.assertEqual(
-            spans.join_spans([self._s1, self._s3_4]),
+            join_spans([self._s1, self._s3_4]),
             str(self._givenNumbers1[0]) + ', ' +
             str(self._givenNumbers3_4[0]) + '-' +
             str(self._givenNumbers3_4[1]))
 
     def testNumbersToSpans(self):
         self.assertEqual(
-            tuple(spans.numbers_to_spans(self._givenNumbers1)), (self._s1,))
+            tuple(numbers_to_spans(self._givenNumbers1)), (self._s1,))
         self.assertEqual(
-            tuple(spans.numbers_to_spans(self._givenNumbers3_4)), (self._s3_4,))
+            tuple(numbers_to_spans(self._givenNumbers3_4)), (self._s3_4,))
         self.assertEqual(
-            tuple(spans.numbers_to_spans(self._givenNumbers)),
+            tuple(numbers_to_spans(self._givenNumbers)),
             (self._s1, self._s3_4,))
 
     def testNumbersToRangeText(self):
-        self.assertEqual(spans.numbers_to_range_text(self._givenNumbers1), '1')
+        self.assertEqual(numbers_to_range_text(self._givenNumbers1), '1')
         self.assertEqual(
-            spans.numbers_to_range_text(self._givenNumbers3_4), '3-4')
+            numbers_to_range_text(self._givenNumbers3_4), '3-4')
         self.assertEqual(
-            spans.numbers_to_range_text(self._givenNumbers),
+            numbers_to_range_text(self._givenNumbers),
             '1, 3-4')
 
     def testExample(self):
         self.assertEqual(
-            spans.numbers_to_range_text([1, 2, 4, 5, 6, 10]),
+            numbers_to_range_text([1, 2, 4, 5, 6, 10]),
             '1-2, 4-6, 10')
