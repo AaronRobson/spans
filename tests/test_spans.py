@@ -52,31 +52,31 @@ class TestSpans(unittest.TestCase):
 
     def testJoinSpans(self):
         self.assertEqual(
-            spans.JoinSpans([self._s1]), str(self._givenNumbers1[0]))
+            spans.join_spans([self._s1]), str(self._givenNumbers1[0]))
         self.assertEqual(
-            spans.JoinSpans([self._s1, self._s3_4]),
+            spans.join_spans([self._s1, self._s3_4]),
             str(self._givenNumbers1[0]) + ', ' +
             str(self._givenNumbers3_4[0]) + '-' +
             str(self._givenNumbers3_4[1]))
 
     def testNumbersToSpans(self):
         self.assertEqual(
-            tuple(spans.NumbersToSpans(self._givenNumbers1)), (self._s1,))
+            tuple(spans.numbers_to_spans(self._givenNumbers1)), (self._s1,))
         self.assertEqual(
-            tuple(spans.NumbersToSpans(self._givenNumbers3_4)), (self._s3_4,))
+            tuple(spans.numbers_to_spans(self._givenNumbers3_4)), (self._s3_4,))
         self.assertEqual(
-            tuple(spans.NumbersToSpans(self._givenNumbers)),
+            tuple(spans.numbers_to_spans(self._givenNumbers)),
             (self._s1, self._s3_4,))
 
     def testNumbersToRangeText(self):
-        self.assertEqual(spans.NumbersToRangeText(self._givenNumbers1), '1')
+        self.assertEqual(spans.numbers_to_range_text(self._givenNumbers1), '1')
         self.assertEqual(
-            spans.NumbersToRangeText(self._givenNumbers3_4), '3-4')
+            spans.numbers_to_range_text(self._givenNumbers3_4), '3-4')
         self.assertEqual(
-            spans.NumbersToRangeText(self._givenNumbers),
+            spans.numbers_to_range_text(self._givenNumbers),
             '1, 3-4')
 
     def testExample(self):
         self.assertEqual(
-            spans.NumbersToRangeText([1, 2, 4, 5, 6, 10]),
+            spans.numbers_to_range_text([1, 2, 4, 5, 6, 10]),
             '1-2, 4-6, 10')

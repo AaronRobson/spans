@@ -50,11 +50,11 @@ class Span:
         return iter(range(self.start, self.finish+1))
 
 
-def JoinSpans(spans):
+def join_spans(spans):
     return ', '.join(map(str, spans))
 
 
-def NumbersToSpans(numbers):
+def numbers_to_spans(numbers):
     sequence = sorted(set(numbers))
 
     currentSpan = None
@@ -73,8 +73,8 @@ def NumbersToSpans(numbers):
         yield currentSpan
 
 
-def NumbersToRangeText(numbers):
-    return JoinSpans(NumbersToSpans(numbers))
+def numbers_to_range_text(numbers):
+    return join_spans(numbers_to_spans(numbers))
 
 
 def parse_numbers(numbersText):
@@ -87,7 +87,8 @@ if __name__ == '__main__':
         'Number span compression, for example the following numbers:' +
         '\n%r\nMay be represented as:\n%r\n' %
         (', '.join(
-            map(str, EXAMPLE_NUMBERS)), NumbersToRangeText(EXAMPLE_NUMBERS)))
+            map(str, EXAMPLE_NUMBERS)),
+            numbers_to_range_text(EXAMPLE_NUMBERS)))
     numberText = input('Enter numbers to compress span: ')
     values = parse_numbers(numberText)
-    print(NumbersToRangeText(values))
+    print(numbers_to_range_text(values))
