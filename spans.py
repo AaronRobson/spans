@@ -78,7 +78,7 @@ def NumbersToRangeText(numbers):
 
 
 def parse_numbers(numbersText):
-    return list(map(int, numbersText.replace(' ', '').split(',')))
+    return list(map(int, numbersText.replace(',', ' ').split()))
 
 
 if __name__ == '__main__':
