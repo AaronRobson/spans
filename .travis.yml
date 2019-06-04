@@ -14,10 +14,12 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install flake8
+  - pip install mypy
   - pip install python-coveralls
 
 script:
   - flake8 .
+  - mypy .
   - nosetests
   - coverage run --source=. -m unittest discover
 

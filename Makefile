@@ -4,8 +4,15 @@
 all: check test
 
 .PHONY: check
-check:
+check: lint type-check
+
+.PHONY: lint
+lint:
 	flake8 .
+
+.PHONY: type-check
+type-check:
+	mypy .
 
 .PHONY: test
 test:
