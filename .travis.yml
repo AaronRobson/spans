@@ -7,13 +7,10 @@ language: python
 
 matrix:
   include:
-    - python: 2.7
-    - python: pypy
     - python: 3.5
     - python: 3.6
     - python: 3.7
     - python: nightly
-    - python: pypy3
   allow_failures:
     - python: nightly
 
