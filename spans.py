@@ -7,6 +7,7 @@ http://texblog.org/2007/05/28/mulitple-reference-citation/
 '''
 
 import argparse
+from typing import Set
 
 
 class Span:
@@ -75,7 +76,7 @@ def numbers_to_spans(numbers):
         yield currentSpan
 
 
-def numbers_to_range_text(numbers):
+def numbers_to_range_text(numbers: Set[int]) -> str:
     return join_spans(numbers_to_spans(numbers))
 
 
