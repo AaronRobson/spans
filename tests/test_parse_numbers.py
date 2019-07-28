@@ -27,3 +27,9 @@ class TestParseNumbers(unittest.TestCase):
 
     def test_incorrect_order(self):
         self.assertEqual(parse_numbers('11,10'), {10, 11})
+
+    def test_range(self):
+        self.assertEqual(parse_numbers('1-3'), {1, 2, 3})
+
+    def test_ranges(self):
+        self.assertEqual(parse_numbers('1-3, 5-6'), {1, 2, 3, 5, 6})

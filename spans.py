@@ -80,7 +80,16 @@ def numbers_to_range_text(numbers):
 
 
 def parse_numbers(numbersText):
-    return set(map(int, numbersText.replace(',', ' ').split()))
+    numbersText = numbersText.replace(',', ' ')
+    output = set()
+    for section in numbersText.split():
+        values = section.split('-')
+        if len(values) == 1:
+            output.add(int(values[0]))
+        else:
+            output.update(set(range(int(values[0]), int(values[1]) + 1)))
+
+    return output
 
 
 def produce_parser():
