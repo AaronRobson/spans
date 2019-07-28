@@ -7,11 +7,11 @@ http://texblog.org/2007/05/28/mulitple-reference-citation/
 '''
 
 import argparse
-from typing import Set
+from typing import Tuple, Iterator, Sequence, Set, Optional, Any
 
 
 class Span:
-    def __init__(self, start, finish=None):
+    def __init__(self, start: int, finish: Optional[int] = None) -> None:
         if finish is None:
             finish = start
 
@@ -19,11 +19,11 @@ class Span:
         self.finish = finish
 
     @property
-    def single(self):
+    def single(self) -> bool:
         return self.start == self.finish
 
     @property
-    def arguments(self):
+    def arguments(self) -> Tuple[int, ...]:
         sequence = [self.start]
         if not self.single:
             sequence += [self.finish]
@@ -31,33 +31,33 @@ class Span:
         return tuple(sequence)
 
     @property
-    def argumentsAsStrings(self):
+    def argumentsAsStrings(self) -> Iterator[str]:
         return map(str, self.arguments)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         try:
             return self.arguments == other.arguments
         except AttributeError:
             # Must therefore be a different type of object.
             return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '%s(%s)' % (
             self.__class__.__name__,
             ', '.join(self.argumentsAsStrings))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '-'.join(self.argumentsAsStrings)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[int]:
         return iter(range(self.start, self.finish+1))
 
 
-def join_spans(spans):
+def join_spans(spans: Sequence[Span]) -> str:
     return ', '.join(map(str, spans))
 
 
-def numbers_to_spans(numbers):
+def numbers_to_spans(numbers: Set[int]):
     sequence = sorted(set(numbers))
 
     currentSpan = None
@@ -80,7 +80,7 @@ def numbers_to_range_text(numbers: Set[int]) -> str:
     return join_spans(numbers_to_spans(numbers))
 
 
-def parse_numbers(numbersText):
+def parse_numbers(numbersText: str) -> Set[int]:
     numbersText = numbersText.replace(',', ' ')
     output = set()
     for section in numbersText.split():
