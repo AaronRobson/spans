@@ -33,3 +33,6 @@ class TestParseNumbers(unittest.TestCase):
 
     def test_ranges(self):
         self.assertEqual(parse_numbers('1-3, 5-6'), {1, 2, 3, 5, 6})
+
+    def test_backwards_range(self):
+        self.assertEqual(parse_numbers('3-1'), {1, 2, 3})

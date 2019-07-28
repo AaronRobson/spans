@@ -87,7 +87,7 @@ def parse_numbers(numbersText):
         if len(values) == 1:
             output.add(int(values[0]))
         else:
-            output.update(set(range(int(values[0]), int(values[1]) + 1)))
+            output.update(set(range(int(min(values)), int(max(values)) + 1)))
 
     return output
 
