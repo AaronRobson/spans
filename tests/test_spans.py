@@ -2,7 +2,7 @@
 
 import unittest
 
-from spans import Span, join_spans, numbers_to_spans, numbers_to_range_text
+from spans import Span, join_spans, numbers_to_spans
 
 
 class TestSpans(unittest.TestCase):
@@ -67,16 +67,3 @@ class TestSpans(unittest.TestCase):
         self.assertEqual(
             tuple(numbers_to_spans(self._givenNumbers)),
             (self._s1, self._s3_4,))
-
-    def testNumbersToRangeText(self):
-        self.assertEqual(numbers_to_range_text(self._givenNumbers1), '1')
-        self.assertEqual(
-            numbers_to_range_text(self._givenNumbers3_4), '3-4')
-        self.assertEqual(
-            numbers_to_range_text(self._givenNumbers),
-            '1, 3-4')
-
-    def testExample(self):
-        self.assertEqual(
-            numbers_to_range_text([1, 2, 4, 5, 6, 10]),
-            '1-2, 4-6, 10')
