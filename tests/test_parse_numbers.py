@@ -36,3 +36,15 @@ class TestParseNumbers(unittest.TestCase):
 
     def test_backwards_range(self):
         self.assertEqual(parse_numbers('3-1'), {1, 2, 3})
+
+    def test_a_negative(self):
+        self.assertEqual(parse_numbers('-3'), {-3})
+
+    def test_two_negative_numbers(self):
+        self.assertEqual(parse_numbers('-3--1'), {-3, -2, -1})
+
+    def test_a_negative_and_a_positive(self):
+        self.assertEqual(parse_numbers('-3-1'), {-3, -2, -1, 0, 1})
+
+    def test_a_positive_and_a_negative(self):
+        self.assertEqual(parse_numbers('3--1'), {-1, 0, 1, 2, 3})
