@@ -4,6 +4,9 @@ from spans import numbers_to_range_text
 
 
 class TestNumbersToRangeText(unittest.TestCase):
+    def test_no_number(self):
+        self.assertEqual(numbers_to_range_text(set()), '')
+
     def test_single_number(self):
         self.assertEqual(numbers_to_range_text((1, )), '1')
 
