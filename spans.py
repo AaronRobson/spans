@@ -15,7 +15,30 @@ def encode(numbers: Set[int]) -> str:
 
 
 def decode(text: str) -> Set[int]:
-    return parse_numbers(text)
+    text = text.replace(',', ' ')
+    output = set()
+    for section in text.split():
+        range_separator_index: Optional[int] = None
+        if section.startswith('-'):
+            try:
+                range_separator_index = section[1:].index('-') + 1
+            except ValueError:
+                pass
+        else:
+            try:
+                range_separator_index = section.index('-')
+            except ValueError:
+                pass
+
+        if range_separator_index is None:
+            output.add(int(section))
+        else:
+            first = int(section[:range_separator_index])
+            second = int(section[range_separator_index + 1:])
+            lower = min(first, second)
+            higher = max(first, second)
+            output.update(set(range(lower, higher + 1)))
+    return output
 
 
 def simplify(text: str) -> str:
@@ -87,33 +110,6 @@ def numbers_to_spans(numbers: Set[int]):
 
     if (currentSpan is not None) and (currentSpan != lastSent):
         yield currentSpan
-
-
-def parse_numbers(numbersText: str) -> Set[int]:
-    numbersText = numbersText.replace(',', ' ')
-    output = set()
-    for section in numbersText.split():
-        range_separator_index: Optional[int] = None
-        if section.startswith('-'):
-            try:
-                range_separator_index = section[1:].index('-') + 1
-            except ValueError:
-                pass
-        else:
-            try:
-                range_separator_index = section.index('-')
-            except ValueError:
-                pass
-
-        if range_separator_index is None:
-            output.add(int(section))
-        else:
-            first = int(section[:range_separator_index])
-            second = int(section[range_separator_index + 1:])
-            lower = min(first, second)
-            higher = max(first, second)
-            output.update(set(range(lower, higher + 1)))
-    return output
 
 
 def produce_parser():
