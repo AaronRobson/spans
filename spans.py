@@ -84,16 +84,17 @@ def parse_numbers(numbersText: str) -> Set[int]:
     numbersText = numbersText.replace(',', ' ')
     output = set()
     for section in numbersText.split():
+        range_separator_index: Optional[int] = None
         if section.startswith('-'):
             try:
                 range_separator_index = section[1:].index('-') + 1
             except ValueError:
-                range_separator_index = None
+                pass
         else:
             try:
                 range_separator_index = section.index('-')
             except ValueError:
-                range_separator_index = None
+                pass
 
         if range_separator_index is None:
             output.add(int(section))
