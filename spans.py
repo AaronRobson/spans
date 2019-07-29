@@ -92,9 +92,6 @@ class Span:
     def __str__(self) -> str:
         return '-'.join(self.argumentsAsStrings)
 
-    def __iter__(self) -> Iterator[int]:
-        return iter(inclusive_range(self.start, self.finish))
-
 
 def join_spans(spans: Sequence[Span]) -> str:
     return ', '.join(map(str, spans))

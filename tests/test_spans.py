@@ -48,9 +48,6 @@ class TestSpans(unittest.TestCase):
             str(_givenNumbers3_4[0]) + '-' +
             str(_givenNumbers3_4[1]))
 
-    def test_iter(self):
-        self.assertEqual(tuple(iter(Span(5, 7))), (5, 6, 7))
-
 
 class TestJoinSpans(unittest.TestCase):
     def test(self):
