@@ -10,6 +10,19 @@ import argparse
 from typing import Tuple, Iterator, Sequence, Set, Optional, Any
 
 
+def to_text(numbers: Set[int]) -> str:
+    return numbers_to_range_text(numbers)
+
+
+def parse(text: str) -> Set[int]:
+    return parse_numbers(text)
+
+
+def simplify(text: str) -> str:
+    '''Reduce to its simplest form.'''
+    return to_text(parse(text))
+
+
 class Span:
     def __init__(self, start: int, finish: Optional[int] = None) -> None:
         if finish is None:
@@ -110,7 +123,7 @@ def parse_numbers(numbersText: str) -> Set[int]:
 def produce_parser():
     example_input_sequence = ('1', '2', '3', '5-7', '10')
     example_input = ' '.join(example_input_sequence)
-    example_output = numbers_to_range_text(parse_numbers(example_input))
+    example_output = simplify(example_input)
     example_text = ('example:\n\n$ python spans.py ' +
                     example_input + '\n' + example_output)
 
@@ -127,4 +140,4 @@ def produce_parser():
 if __name__ == '__main__':
     parser = produce_parser()
     args = parser.parse_args()
-    print(numbers_to_range_text(parse_numbers(' '.join(args.values))))
+    print(simplify(' '.join(args.values)))
