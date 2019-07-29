@@ -20,9 +20,9 @@ cd spans
 
 ## Running
 ```bash
-python spans.py 1 2 4 5 6 10
+python3 spans.py 1 2 3 5-7 10
 ```
 which returns
 ```bash
-1-2, 4-6, 10
+1-3, 5-7, 10
 ```

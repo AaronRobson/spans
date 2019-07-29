@@ -12,10 +12,13 @@ class TestProduceParser(unittest.TestCase):
         self.f = parser.parse_args
 
     def test_empty(self):
-        self.assertEqual(self.f([]).numbers, [])
+        self.assertEqual(self.f([]).values, [])
 
     def test_single(self):
-        self.assertEqual(self.f(['1']).numbers, [1])
+        self.assertEqual(self.f(['1']).values, ['1'])
 
     def test_double(self):
-        self.assertEqual(self.f(['1', '2']).numbers, [1, 2])
+        self.assertEqual(self.f(['1', '2']).values, ['1', '2'])
+
+    def test_range(self):
+        self.assertEqual(self.f(['1-3']).values, ['1-3'])

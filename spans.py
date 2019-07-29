@@ -108,7 +108,8 @@ def parse_numbers(numbersText: str) -> Set[int]:
 
 
 def produce_parser():
-    example_input = '1 2 4 5 6 10'
+    example_input_sequence = ('1', '2', '3', '5-7', '10')
+    example_input = ' '.join(example_input_sequence)
     example_output = numbers_to_range_text(parse_numbers(example_input))
     example_text = ('example:\n\n$ python spans.py ' +
                     example_input + '\n' + example_output)
@@ -118,12 +119,12 @@ def produce_parser():
         epilog=example_text,
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
-        'numbers', type=int, nargs='*',
-        help='a list of numbers')
+        'values', type=str, nargs='*',
+        help='a list of numbers and ranges of numbers')
     return parser
 
 
 if __name__ == '__main__':
     parser = produce_parser()
     args = parser.parse_args()
-    print(numbers_to_range_text(args.numbers))
+    print(numbers_to_range_text(parse_numbers(' '.join(args.values))))
