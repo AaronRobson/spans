@@ -11,7 +11,7 @@ from typing import Tuple, Iterator, Sequence, Set, Optional, Any
 
 
 def encode(numbers: Set[int]) -> str:
-    return numbers_to_range_text(numbers)
+    return join_spans(numbers_to_spans(numbers))
 
 
 def decode(text: str) -> Set[int]:
@@ -87,10 +87,6 @@ def numbers_to_spans(numbers: Set[int]):
 
     if (currentSpan is not None) and (currentSpan != lastSent):
         yield currentSpan
-
-
-def numbers_to_range_text(numbers: Set[int]) -> str:
-    return join_spans(numbers_to_spans(numbers))
 
 
 def parse_numbers(numbersText: str) -> Set[int]:
