@@ -35,15 +35,22 @@ def decode(text: str) -> Set[int]:
         else:
             first = int(section[:range_separator_index])
             second = int(section[range_separator_index + 1:])
-            lower = min(first, second)
-            higher = max(first, second)
-            output.update(set(range(lower, higher + 1)))
+            output.update(set(inclusive_range(first, second)))
     return output
 
 
 def simplify(text: str) -> str:
     '''Reduce to its simplest form.'''
     return encode(decode(text))
+
+
+def inclusive_range(first: int, second: Optional[int] = None) -> Sequence[int]:
+    if second is None:
+        second = first
+
+    lower = min(first, second)
+    higher = max(first, second)
+    return list(range(lower, higher + 1))
 
 
 class Span:
@@ -86,7 +93,7 @@ class Span:
         return '-'.join(self.argumentsAsStrings)
 
     def __iter__(self) -> Iterator[int]:
-        return iter(range(self.start, self.finish+1))
+        return iter(inclusive_range(self.start, self.finish))
 
 
 def join_spans(spans: Sequence[Span]) -> str:
