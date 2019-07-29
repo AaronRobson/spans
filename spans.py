@@ -10,17 +10,17 @@ import argparse
 from typing import Tuple, Iterator, Sequence, Set, Optional, Any
 
 
-def to_text(numbers: Set[int]) -> str:
+def encode(numbers: Set[int]) -> str:
     return numbers_to_range_text(numbers)
 
 
-def parse(text: str) -> Set[int]:
+def decode(text: str) -> Set[int]:
     return parse_numbers(text)
 
 
 def simplify(text: str) -> str:
     '''Reduce to its simplest form.'''
-    return to_text(parse(text))
+    return encode(decode(text))
 
 
 class Span:
