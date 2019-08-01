@@ -18,17 +18,12 @@ def decode(text: str) -> Set[int]:
     text = text.replace(',', ' ')
     output = set()
     for section in text.split():
+        starts_with_minus = section.startswith('-')
         range_separator_index: Optional[int] = None
-        if section.startswith('-'):
-            try:
-                range_separator_index = section.index('-', 1)
-            except ValueError:
-                pass
-        else:
-            try:
-                range_separator_index = section.index('-')
-            except ValueError:
-                pass
+        try:
+            range_separator_index = section.index('-', int(starts_with_minus))
+        except ValueError:
+            pass
 
         if range_separator_index is None:
             output.add(int(section))
