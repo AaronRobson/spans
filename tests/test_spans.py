@@ -16,13 +16,11 @@ class TestSpans(unittest.TestCase):
     def test_single_number(self):
         self.assertEqual(_s1.start, _givenNumbers1[0])
         self.assertEqual(_s1.finish, _givenNumbers1[0])
-        self.assertTrue(_s1.single)
         self.assertEqual(_s1.arguments, _givenNumbers1)
 
     def test_range_of_numbers(self):
         self.assertEqual(_s3_4.start, _givenNumbers3_4[0])
         self.assertEqual(_s3_4.finish, _givenNumbers3_4[1])
-        self.assertFalse(_s3_4.single)
         self.assertEqual(_s3_4.arguments, _givenNumbers3_4)
 
     def test_equality(self):

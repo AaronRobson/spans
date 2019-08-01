@@ -53,13 +53,9 @@ class Span:
         self.finish = finish
 
     @property
-    def single(self) -> bool:
-        return self.start == self.finish
-
-    @property
     def arguments(self) -> Tuple[int, ...]:
         sequence = [self.start]
-        if not self.single:
+        if self.start != self.finish:
             sequence += [self.finish]
 
         return tuple(sequence)
