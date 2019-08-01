@@ -21,7 +21,7 @@ def decode(text: str) -> Set[int]:
         range_separator_index: Optional[int] = None
         if section.startswith('-'):
             try:
-                range_separator_index = section[1:].index('-') + 1
+                range_separator_index = section.index('-', 1)
             except ValueError:
                 pass
         else:
