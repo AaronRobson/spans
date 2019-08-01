@@ -19,13 +19,9 @@ def decode(text: str) -> Set[int]:
     output = set()
     for section in text.split():
         starts_with_minus = section.startswith('-')
-        range_separator_index: Optional[int] = None
         try:
             range_separator_index = section.index('-', int(starts_with_minus))
         except ValueError:
-            pass
-
-        if range_separator_index is None:
             output.add(int(section))
         else:
             first = int(section[:range_separator_index])
