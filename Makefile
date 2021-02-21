@@ -17,3 +17,7 @@ type-check:
 .PHONY: test
 test:
 	python3 -m unittest
+
+.PHONY: run
+run:
+	python3 spans.py $(args)

@@ -19,10 +19,19 @@ cd spans
 ```
 
 ## Running
+
+### Via Make
+```bash
+make run args="1 2 3"
+```
+
+### Directly
 ```bash
 python3 spans.py 1 2 3 5-7 10
 ```
-which returns
+
+### Expected result
+Either of the two forms should return:
 ```bash
 1-3, 5-7, 10
 ```
