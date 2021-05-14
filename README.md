@@ -12,25 +12,40 @@ a document like this:
 or like this:
 `1-5`
 
-## Installation
+# Download
 ```bash
 git clone https://github.com/AaronRobson/spans.git
 cd spans
 ```
 
-## Running
-
-### Via Make
+# Install python packages
 ```bash
-make run args="1 2 3"
+make install-packages
 ```
 
-### Directly
+# Lint
+```bash
+make check
+```
+
+# Test
+```bash
+make test
+```
+
+# Running
+
+## Via Make
+```bash
+make run args="1 2 3 5-7 10"
+```
+
+## Directly
 ```bash
 python3 spans.py 1 2 3 5-7 10
 ```
 
-### Expected result
+## Expected result
 Either of the two forms should return:
 ```bash
 1-3, 5-7, 10
