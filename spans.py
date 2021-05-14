@@ -61,7 +61,7 @@ class Span:
         return tuple(sequence)
 
     @property
-    def argumentsAsStrings(self) -> Iterator[str]:
+    def arguments_as_strings(self) -> Iterator[str]:
         return map(str, self.arguments)
 
     def __eq__(self, other: Any) -> bool:
@@ -74,10 +74,10 @@ class Span:
     def __repr__(self) -> str:
         return '%s(%s)' % (
             self.__class__.__name__,
-            ', '.join(self.argumentsAsStrings))
+            ', '.join(self.arguments_as_strings))
 
     def __str__(self) -> str:
-        return '-'.join(self.argumentsAsStrings)
+        return '-'.join(self.arguments_as_strings)
 
 
 def join_spans(spans: Sequence[Span]) -> str:
@@ -87,20 +87,20 @@ def join_spans(spans: Sequence[Span]) -> str:
 def numbers_to_spans(numbers: Set[int]):
     sequence = sorted(set(numbers))
 
-    currentSpan = None
-    lastSent = None
+    current_span = None
+    last_sent = None
     for number in sequence:
-        if currentSpan is None:
-            currentSpan = Span(number)
-        elif currentSpan.finish + 1 == number:
-            currentSpan.finish += 1
+        if current_span is None:
+            current_span = Span(number)
+        elif current_span.finish + 1 == number:
+            current_span.finish += 1
         else:
-            yield currentSpan
-            lastSent = currentSpan
-            currentSpan = Span(number)
+            yield current_span
+            last_sent = current_span
+            current_span = Span(number)
 
-    if (currentSpan is not None) and (currentSpan != lastSent):
-        yield currentSpan
+    if (current_span is not None) and (current_span != last_sent):
+        yield current_span
 
 
 def produce_parser():
