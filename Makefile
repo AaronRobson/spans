@@ -22,11 +22,15 @@ type-check:
 	mypy .
 
 .PHONY: test
-test: unittest
+test: unittest mutation-test
 
 .PHONY: unittest
 unittest:
 	python3 -m unittest
+
+.PHONY: mutation-test
+mutation-test:
+	mut.py --target spans --unit-test tests -m
 
 .PHONY: run
 run:

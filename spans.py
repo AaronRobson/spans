@@ -65,14 +65,10 @@ class Span:
         return map(str, self.arguments)
 
     def __eq__(self, other: Any) -> bool:
-        try:
-            return self.arguments == other.arguments
-        except AttributeError:
-            # Must therefore be a different type of object.
-            return False
+        return isinstance(other, self.__class__) and self.arguments == other.arguments
 
     def __repr__(self) -> str:
-        return '%s(%s)' % (
+        return '{}({})'.format(
             self.__class__.__name__,
             ', '.join(self.arguments_as_strings))
 
@@ -99,7 +95,7 @@ def numbers_to_spans(numbers: Set[int]):
             last_sent = current_span
             current_span = Span(number)
 
-    if (current_span is not None) and (current_span != last_sent):
+    if current_span != last_sent:
         yield current_span
 
 
