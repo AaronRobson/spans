@@ -27,6 +27,7 @@ class TestSpans(unittest.TestCase):
         self.assertEqual(_s1, _s1)
         self.assertNotEqual(_s1, _s3_4)
         self.assertEqual(_s3_4, _s3_4)
+        self.assertNotEqual(_s1, 'other object example')
 
     def test_repr(self):
         self.assertEqual(
