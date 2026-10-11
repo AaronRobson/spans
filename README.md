@@ -39,6 +39,26 @@ make check
 make test
 ```
 
+### Unit test
+
+```sh
+make unittest-python
+```
+
+#### Specific unit test
+
+For example:
+
+```sh
+make unittest testcase=tests.test_consistent.TestConsistent.test_decode_inverts_encode
+```
+
+### Mutation test
+
+```sh
+make mutation-test
+```
+
 ## Running
 
 ## Via Make

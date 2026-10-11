@@ -26,7 +26,7 @@ test: unittest mutation-test
 
 .PHONY: unittest
 unittest:
-	python3 -m unittest
+	python3 -m unittest $(testcase)
 
 .PHONY: mutation-test
 mutation-test:
