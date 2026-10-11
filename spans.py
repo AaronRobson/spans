@@ -116,7 +116,7 @@ def produce_parser():
     return parser
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     parser = produce_parser()
     args = parser.parse_args()
     print(simplify(' '.join(args.values)))
