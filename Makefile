@@ -5,7 +5,7 @@ all: check test
 
 .PHONY: install-packages
 install-packages:
-	pip3 install --upgrade --upgrade-strategy eager \
+	python3 -m pip install --upgrade --upgrade-strategy eager \
 	  -r dev-requirements.txt \
 	  -r requirements.txt \
 	  -r tests/requirements.txt
@@ -15,11 +15,11 @@ check: lint type-check
 
 .PHONY: lint
 lint:
-	flake8 .
+	python3 -m flake8 .
 
 .PHONY: type-check
 type-check:
-	mypy .
+	python3 -m mypy .
 
 .PHONY: test
 test: unittest mutation-test
