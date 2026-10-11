@@ -5,7 +5,7 @@ all: check test
 
 .PHONY: install-packages
 install-packages:
-	pip3 install --upgrade \
+	pip3 install --upgrade --upgrade-strategy eager \
 	  -r dev-requirements.txt \
 	  -r requirements.txt \
 	  -r tests/requirements.txt
