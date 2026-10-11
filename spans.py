@@ -7,14 +7,14 @@ http://texblog.org/2007/05/28/mulitple-reference-citation/
 '''
 
 import argparse
-from typing import Tuple, Iterator, Sequence, Set, Optional, Any
+from typing import Iterator, Sequence, Optional, Any
 
 
-def encode(numbers: Set[int]) -> str:
+def encode(numbers: set[int]) -> str:
     return join_spans(numbers_to_spans(numbers))
 
 
-def decode(text: str) -> Set[int]:
+def decode(text: str) -> set[int]:
     text = text.replace(',', ' ')
     output = set()
     for section in text.split():
@@ -53,7 +53,7 @@ class Span:
         self.finish = finish
 
     @property
-    def arguments(self) -> Tuple[int, ...]:
+    def arguments(self) -> tuple[int, ...]:
         sequence = [self.start]
         if self.start != self.finish:
             sequence += [self.finish]
@@ -80,7 +80,7 @@ def join_spans(spans: Sequence[Span]) -> str:
     return ', '.join(map(str, spans))
 
 
-def numbers_to_spans(numbers: Set[int]):
+def numbers_to_spans(numbers: set[int]):
     sequence = sorted(set(numbers))
 
     current_span = None
